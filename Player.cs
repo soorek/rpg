@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace rpg
 {
-    internal class Player : Character
+    internal class Player : CharacterExp
     {
         public int Expirience { get; private set; }
 
