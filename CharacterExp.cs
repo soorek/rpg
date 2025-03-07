@@ -29,5 +29,47 @@ namespace rpg
                 Experience -= ExpRequired;
             }
         }
+
+        private void AddLevel()
+        {
+            Level++;
+           
+            Console.WriteLine("Вы повысили уровень, выберите навык для улучшения " +
+                "hp / dmg");
+            if (Console.ReadLine() == "hp")
+            {
+                Health += 100;
+                Console.WriteLine("Ваше здоровье увеличено на 100!");
+            }
+            else if (Console.ReadLine() == "dmg")
+            {
+                AttackPower += 20;
+                Console.WriteLine("Урон увеличен на 20 единиц");
+            }
+        }
+
+        private void ChoiceAttribute(string message)
+        {
+            Console.WriteLine(message);
+
+            string choice = Console.ReadLine();  // Получаем выбор пользователя
+
+            switch (choice)
+            {
+                case "dmg":
+                    AttackPower += 20;
+                    Console.WriteLine($"Attack Power increased to {AttackPower}");
+                    break;
+
+                case "hp":
+                    Health += 100;
+                    Console.WriteLine($"Health increased to {Health}");
+                    break;
+
+                default:
+                    ChoiceAttribute("Invalid choice, try again.");  // Повторный вызов, если выбор неверный
+                    break;
+            }
+        }
     }
 }
