@@ -17,16 +17,16 @@ namespace rpg
         protected const double GROWTH_FACTOR = 0.3;
         protected const int BASE_EXPERIENCE = 100;
         public double Experience { get; protected set; }
+        public double ExperienceRequired => BASE_EXPERIENCE * (Math.Pow(Level, 2) * GROWTH_FACTOR);
 
         public void AddExp(int exp)
         {
-            double ExpRequired = BASE_EXPERIENCE * (Math.Pow(Level,2) * GROWTH_FACTOR);
             Experience += exp;
 
-            if(Experience > ExpRequired)
+            if(Experience > ExperienceRequired)
             {
-                Level++;
-                Experience -= ExpRequired;
+                Experience -= ExperienceRequired;
+                AddLevel();
             }
         }
 
@@ -34,26 +34,16 @@ namespace rpg
         {
             Level++;
            
-            Console.WriteLine("Вы повысили уровень, выберите навык для улучшения " +
+            ChoiceAttribute("Вы повысили уровень, выберите навык для улучшения " +
                 "hp / dmg");
-            if (Console.ReadLine() == "hp")
-            {
-                Health += 100;
-                Console.WriteLine("Ваше здоровье увеличено на 100!");
-            }
-            else if (Console.ReadLine() == "dmg")
-            {
-                AttackPower += 20;
-                Console.WriteLine("Урон увеличен на 20 единиц");
-            }
+           
         }
 
         private void ChoiceAttribute(string message)
         {
             Console.WriteLine(message);
 
-            string choice = Console.ReadLine();  // Получаем выбор пользователя
-
+            string? choice = Console.ReadLine()?.ToLower();  // Получаем выбор пользователя
             switch (choice)
             {
                 case "dmg":

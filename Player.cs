@@ -33,5 +33,14 @@ namespace rpg
             }
         }
 
+        public void ShowInfo()
+        {
+            Console.WriteLine($"Ваш уровент: {Level} \n" +
+                $"Текущий опыт: {Expirience} / {ExperienceRequired} \n" +
+                $"Здоровье: {Health} \n" +
+                $"Базовый урон: {AttackPower}");
+        }
+
+
     }
 }
