@@ -8,18 +8,17 @@ namespace rpg
 {
     internal class Player : Character, ILeveling
     {
-        public int Expirience { get; private set; }
+        protected const double GROWTH_FACTOR = 0.3;
+        protected const int BASE_EXPERIENCE = 100;
+        public double Experience { get; protected set; }
+        public double ExperienceRequired => BASE_EXPERIENCE * (Math.Pow(Level, 2) * GROWTH_FACTOR);
 
         public Player(string name, int health, int attackPower, int level)
             :base(name, health, attackPower, level)
         {
         }
 
-        protected const double GROWTH_FACTOR = 0.3;
-        protected const int BASE_EXPERIENCE = 100;
-        public double Experience { get; protected set; }
-        public double ExperienceRequired => BASE_EXPERIENCE * (Math.Pow(Level, 2) * GROWTH_FACTOR);
-
+       
 
         public void ShowInfo()
         {
