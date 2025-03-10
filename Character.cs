@@ -24,7 +24,12 @@ namespace rpg
         
         public void TakeDamage (int damage)
         {
+
+            if (damage < 0) return;
+
             Health -= damage;
+            Console.WriteLine($"{Name} получил {damage} урона. Осталось здоровья: {Health}");
+
             if (Health <= 0)
             {
                 Console.WriteLine($"{Name} погиб.");
@@ -34,6 +39,8 @@ namespace rpg
 
         public void Attack(Character target)
         {
+            
+
             target.TakeDamage(AttackPower);
             Console.WriteLine($"{Name} атакует {target.Name} и наносит {AttackPower} урона");
         }
