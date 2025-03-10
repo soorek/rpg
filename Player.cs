@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace rpg
 {
-    internal class Player : CharacterExp
+    internal class Player : Character, ILeveling
     {
         public int Expirience { get; private set; }
 
@@ -14,6 +14,12 @@ namespace rpg
             :base(name, health, attackPower, level)
         {
         }
+
+        protected const double GROWTH_FACTOR = 0.3;
+        protected const int BASE_EXPERIENCE = 100;
+        public double Experience { get; protected set; }
+        public double ExperienceRequired => BASE_EXPERIENCE * (Math.Pow(Level, 2) * GROWTH_FACTOR);
+
 
         public void ShowInfo()
         {
@@ -23,6 +29,48 @@ namespace rpg
                 $"Базовый урон: {AttackPower}");
         }
 
+        private void ChoiceAttribute(string message)
+        {
+            Console.WriteLine(message);
+
+            string? choice = Console.ReadLine()?.ToLower();  // Получаем выбор пользователя
+            switch (choice)
+            {
+                case "dmg":
+                    AttackPower += 20;
+                    Console.WriteLine($"Сила атаки увеличина на {AttackPower}");
+                    break;
+
+                case "hp":
+                    Health += 100;
+                    Console.WriteLine($"Здоровье увеличино на {Health}");
+                    break;
+
+                default:
+                    ChoiceAttribute("Не верный выбор. Укажите hp или dmg, попробуйте ещё раз.");  // Повторный вызов, если выбор неверный
+                    break;
+            }
+        }
+
+        public void AddExp(int exp)
+        {
+            Experience += exp;
+
+            if (Experience > ExperienceRequired)
+            {
+                Experience -= ExperienceRequired;
+                AddLevel();
+            }
+        }
+
+        public void AddLevel()
+        {
+            Level++;
+
+            ChoiceAttribute("Вы повысили уровень, выберите навык для улучшения " +
+                "hp / dmg");
+
+        }
 
     }
 }
