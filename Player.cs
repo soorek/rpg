@@ -8,10 +8,9 @@ namespace rpg
 {
     internal class Player : Character, ILeveling
     {
-        protected const double GROWTH_FACTOR = 0.3;
-        protected const int BASE_EXPERIENCE = 100;
+        
         public double Experience { get; protected set; }
-        public double ExperienceRequired => BASE_EXPERIENCE * (Math.Pow(Level, 2) * GROWTH_FACTOR);
+        public double ExperienceRequired => GameSettings.BASE_EXPERIENCE * (Math.Pow(Level, 2) * GameSettings.GROWTH_FACTOR);
 
         public Player(string name, int health, int attackPower, int level)
             :base(name, health, attackPower, level)
@@ -32,7 +31,7 @@ namespace rpg
         {
             Console.WriteLine(message);
 
-            string? choice = Console.ReadLine()?.ToLower();  // Получаем выбор пользователя
+            string? choice = Console.ReadLine()?.ToLower();  
             switch (choice)
             {
                 case "dmg":
