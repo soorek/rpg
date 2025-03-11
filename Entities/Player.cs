@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using rpg.Engine;
+using rpg.Engine.Skills;
 
 namespace rpg.Entities
 {
@@ -10,21 +7,29 @@ namespace rpg.Entities
     {
 
         public double Experience { get; protected set; }
-        public double ExperienceRequired => GameSettings.BASE_EXPERIENCE * (Math.Pow(Level, 2) * GameSettings.GROWTH_FACTOR);
+        public double ExperienceRequired => GameSettings.BASE_EXPERIENCE * (Math.Pow(Attributes.Level, 2) * GameSettings.GROWTH_FACTOR);
 
-        public Player(string name, int health, int attackPower, int level)
-            : base(name, health, attackPower, level)
+        public override string Name => _name;
+
+        private readonly Attributes _attributes;
+        public override Attributes Attributes => _attributes;
+
+        private readonly string _name;
+
+        public Player(string name, Attributes attributes)
         {
+            _name = name;
+            _attributes = attributes;
         }
 
 
 
         public void ShowInfo()
         {
-            Console.WriteLine($"Ваш уровень: {Level} \n" +
+            Console.WriteLine($"Ваш уровень: {Attributes.Level} \n" +
                 $"Текущий опыт: {(int)Experience} / {(int)ExperienceRequired} \n" +
-                $"Здоровье: {Health} \n" +
-                $"Базовый урон: {AttackPower}");
+                $"Здоровье: {Attributes.Health} \n" +
+                $"Базовый урон: {Attributes.AttackPower}");
         }
 
         private void ChoiceAttribute(string message)
@@ -35,13 +40,13 @@ namespace rpg.Entities
             switch (choice)
             {
                 case "dmg":
-                    AttackPower += 20;
-                    Console.WriteLine($"Сила атаки увеличина на {AttackPower}");
+                    Attributes.AttackPower += 20;
+                    Console.WriteLine($"Сила атаки увеличина на {Attributes.AttackPower}");
                     break;
 
                 case "hp":
-                    Health += 100;
-                    Console.WriteLine($"Здоровье увеличино на {Health}");
+                    Attributes.Health += 100;
+                    Console.WriteLine($"Здоровье увеличино на {Attributes.Health}");
                     break;
 
                 default:
@@ -63,7 +68,7 @@ namespace rpg.Entities
 
         public void AddLevel()
         {
-            Level++;
+            Attributes.Level++;
 
             ChoiceAttribute("Вы повысили уровень, выберите навык для улучшения " +
                 "hp / dmg");

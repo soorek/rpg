@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace rpg.Entities.Enemies
+﻿namespace rpg.Entities.Enemies
 {
     internal class Bandit : Enemy
     {
+        public Bandit(int level) : base(level)
+        {
+        }
 
-        public Bandit(string name, int health, int attackPower, int level)
-            : base(name, health, attackPower, level) { }
+        public override string Name => "Бандит";
 
+        protected override double HealthModify => 1;
+        protected override double AttackPowerModify => 1;
+        protected override double ManaModify => 1;
+        protected override double StaminaModify => 1;
+        protected override double ArmorModify => 1;
+        protected override double EvasionModify => 1;
 
-
+        protected override double BaseHealth => 50;
+        protected override double BaseAttackPower => 10;
+        protected override double BaseMana => 0;
+        protected override double BaseStamina => 100;
+        protected override double BaseArmor => 0;
+        protected override double BaseEvasion => 0.2;
     }
 }

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using rpg.Engine.Skills;
 
 namespace rpg.Entities
 {
     internal class Companion : Character, ILeveling
     {
 
-        public Companion(string name, int health, int attackPower, int level)
-            : base(name, health, attackPower, level)
-        {
-        }
+
+        public override string Name => throw new NotImplementedException();
+
+        public override Attributes Attributes => throw new NotImplementedException();
 
         public void AddExp(int exp)
         {
