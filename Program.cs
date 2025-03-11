@@ -1,4 +1,4 @@
-﻿using rpg;
+﻿using rpg.Entities;
 
 internal class Program
 {

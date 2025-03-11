@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace rpg
+namespace rpg.Entities
 {
     internal abstract class Character
     {
@@ -14,15 +14,15 @@ namespace rpg
         public int AttackPower { get; protected set; }
         public int Level { get; protected set; }
 
-        public Character(string name,  int health, int attackPower, int level)
+        public Character(string name, int health, int attackPower, int level)
         {
             Name = name;
             Health = health;
             AttackPower = attackPower;
             Level = level;
         }
-        
-        public void TakeDamage (int damage)
+
+        public void TakeDamage(int damage)
         {
 
             if (damage < 0) return;
@@ -39,7 +39,7 @@ namespace rpg
 
         public void Attack(Character target)
         {
-            
+
 
             target.TakeDamage(AttackPower);
             Console.WriteLine($"{Name} атакует {target.Name} и наносит {AttackPower} урона");

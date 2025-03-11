@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace rpg
+namespace rpg.Entities
 {
     internal class Enemy : Character
     {
 
         public Enemy(string name, int health, int attackPower, int level)
-            :base(name, health, attackPower, level) { }
+            : base(name, health, attackPower, level) { }
 
     }
 }

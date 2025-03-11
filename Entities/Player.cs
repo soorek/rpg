@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace rpg
+namespace rpg.Entities
 {
     internal class Player : Character, ILeveling
     {
-        
+
         public double Experience { get; protected set; }
         public double ExperienceRequired => GameSettings.BASE_EXPERIENCE * (Math.Pow(Level, 2) * GameSettings.GROWTH_FACTOR);
 
         public Player(string name, int health, int attackPower, int level)
-            :base(name, health, attackPower, level)
+            : base(name, health, attackPower, level)
         {
         }
 
-       
+
 
         public void ShowInfo()
         {
@@ -31,7 +31,7 @@ namespace rpg
         {
             Console.WriteLine(message);
 
-            string? choice = Console.ReadLine()?.ToLower();  
+            string? choice = Console.ReadLine()?.ToLower();
             switch (choice)
             {
                 case "dmg":
